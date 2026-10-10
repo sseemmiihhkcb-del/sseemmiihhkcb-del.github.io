@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Survivors</title>
+<meta name="description" content="Ember Survivors: dalga dalga gelen düşmanlara karşı hayatta kal. Ücretsiz indir! / Survive endless waves of enemies. Free to play!">
+<meta property="og:title" content="Ember Survivors">
+<meta property="og:description" content="Dalga dalga gelen düşmanlara karşı hayatta kal. Ücretsiz indir! / Survive endless waves. Free to play!">
+<meta property="og:type" content="website">
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:#14110f; color:#f3ece4; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  main { max-width:420px; padding:32px 24px; text-align:center; }
+  h1 { margin:0 0 8px; font-size:2rem; }
+  p { margin:0 0 24px; line-height:1.5; color:#cdbfb0; }
+  a.btn { display:block; padding:16px 20px; border-radius:12px; background:#e8641b; color:#fff;
+          font-weight:700; text-decoration:none; font-size:1.05rem; }
+  small { display:block; margin-top:16px; color:#8c7d6f; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Ember Survivors</h1>
+  <p id="desc">Dalga dalga gelen düşmanlara karşı hayatta kal. Ücretsiz!</p>
+  <a class="btn" id="store" href="#">Google Play'den indir</a>
+  <small id="note"></small>
+</main>
+<script>
+  var PACKAGE = "com.fizzlegames.embersurvivors";
+  var params = new URLSearchParams(location.search);
+  var src = params.get("src");
+
+  var play = "https://play.google.com/store/apps/details?id=" + PACKAGE;
+  if (src) {
+    play += "&referrer=" + encodeURIComponent("utm_source=" + src + "&utm_medium=smartlink");
+  }
+
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+  var btn = document.getElementById("store");
+  btn.href = play;
+
+  if (isAndroid) {
+    location.replace(play);
+  } else if (isIOS) {
+    document.getElementById("note").textContent = "iOS sürümü yakında. / iOS version coming soon.";
+  } else {
+    document.getElementById("note").textContent = "Telefonundan aç veya butona tıkla.";
+  }
+</script>
+</body>
+</html>
