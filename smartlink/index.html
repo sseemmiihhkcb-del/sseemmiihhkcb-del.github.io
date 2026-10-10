@@ -12,23 +12,24 @@
   :root { color-scheme: dark; }
   body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
          background:#14110f; color:#f3ece4; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
-  main { max-width:420px; padding:32px 24px; text-align:center; }
+  main { max-width:420px; width:100%; padding:32px 24px; text-align:center; }
   h1 { margin:0 0 8px; font-size:2rem; }
   p { margin:0 0 24px; line-height:1.5; color:#cdbfb0; }
   a.btn { display:block; padding:16px 20px; border-radius:12px; background:#e8641b; color:#fff;
-          font-weight:700; text-decoration:none; font-size:1.05rem; }
-  small { display:block; margin-top:16px; color:#8c7d6f; }
+          font-weight:700; text-decoration:none; font-size:1.05rem; margin-bottom:12px; }
+  a.btn.ios { background:#2b2622; border:1px solid #5a4d42; }
 </style>
 </head>
 <body>
 <main>
   <h1>Ember Survivors</h1>
-  <p id="desc">Dalga dalga gelen düşmanlara karşı hayatta kal. Ücretsiz!</p>
-  <a class="btn" id="store" href="#">Google Play'den indir</a>
-  <small id="note"></small>
+  <p>Dalga dalga gelen düşmanlara karşı hayatta kal. Ücretsiz! / Survive endless waves. Free to play!</p>
+  <a class="btn" id="play" href="#">Google Play</a>
+  <a class="btn ios" id="appstore" href="#">App Store</a>
 </main>
 <script>
   var PACKAGE = "com.fizzlegames.embersurvivors";
+  var APPSTORE = "https://apps.apple.com/app/id6809781155";
   var params = new URLSearchParams(location.search);
   var src = params.get("src");
 
@@ -39,17 +40,15 @@
 
   var ua = navigator.userAgent || "";
   var isAndroid = /Android/i.test(ua);
-  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
 
-  var btn = document.getElementById("store");
-  btn.href = play;
+  document.getElementById("play").href = play;
+  document.getElementById("appstore").href = APPSTORE;
 
   if (isAndroid) {
     location.replace(play);
   } else if (isIOS) {
-    document.getElementById("note").textContent = "iOS sürümü yakında. / iOS version coming soon.";
-  } else {
-    document.getElementById("note").textContent = "Telefonundan aç veya butona tıkla.";
+    location.replace(APPSTORE);
   }
 </script>
 </body>
