@@ -3,37 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fizzle Games</title>
+<meta name="description" content="Fizzle Games – indie mobile game studio. Ember Survivors, Iron Survivor: Mech War and War Survivor Last Stand.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
-<title>FizzleGames</title>
 <style>
-  body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #222; }
-  h1 { font-size: 1.8em; }
-  h2 { font-size: 1.2em; margin-top: 30px; }
-  a { color: #0b57d0; }
+  :root { --bg: #0f0d16; --card: #1a1724; --text: #f2eff8; --muted: #a9a3b8; --accent: #c45cff; --line: #2e2940; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height: 1.55; }
+  main { max-width: 820px; margin: 0 auto; padding: 24px 16px 56px; }
+  .lang { display: flex; justify-content: flex-end; gap: 6px; }
+  .lang button { background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 4px 12px; font: inherit; font-size: .9em; cursor: pointer; }
+  .lang button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  header { display: flex; align-items: center; gap: 18px; margin: 18px 0 32px; flex-wrap: wrap; }
+  header img { width: 96px; height: 96px; border-radius: 22px; }
+  h1 { margin: 0; font-size: 2em; line-height: 1.2; }
+  .tag { margin: 2px 0 0; color: var(--muted); }
+  .games { display: grid; gap: 16px; }
+  .game { display: flex; gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+  .game > a img { width: 112px; height: 112px; border-radius: 24px; display: block; }
+  .game h2 { margin: 0 0 4px; font-size: 1.25em; }
+  .game p { margin: 0 0 12px; color: var(--muted); }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .links a { font-size: .9em; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--line); color: var(--text); text-decoration: none; }
+  .links a.store { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .soon { font-size: .9em; padding: 6px 12px; border-radius: 8px; border: 1px dashed var(--line); color: var(--muted); }
+  h3 { margin: 40px 0 6px; font-size: 1.1em; }
+  a { color: #d79bff; }
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9em; }
+  @media (max-width: 520px) { .game { flex-direction: column; } }
+  html[lang="en"] [data-lang="tr"], html[lang="tr"] [data-lang="en"] { display: none !important; }
 </style>
+<script>
+  (function () {
+    var l = "en";
+    try { l = localStorage.getItem("lang") || ((navigator.language || "").toLowerCase().indexOf("tr") === 0 ? "tr" : "en"); } catch (e) {}
+    document.documentElement.lang = l;
+  })();
+  function setLang(l) {
+    document.documentElement.lang = l;
+    try { localStorage.setItem("lang", l); } catch (e) {}
+    document.querySelectorAll(".lang button").forEach(function (b) { b.classList.toggle("on", b.dataset.l === l); });
+  }
+  document.addEventListener("DOMContentLoaded", function () { setLang(document.documentElement.lang); });
+</script>
 </head>
 <body>
-<h1>FizzleGames</h1>
-<p>Indie mobile game studio.</p>
+<main>
+  <div class="lang">
+    <button type="button" data-l="en" onclick="setLang('en')">English</button>
+    <button type="button" data-l="tr" onclick="setLang('tr')">Türkçe</button>
+  </div>
 
-<h2>Ember Survivors</h2>
-<p>A fast-paced survival-action game. Fight endless waves of enemies, level up, and unlock new powers.</p>
-<ul>
-<li><a href="https://play.google.com/store/apps/details?id=com.fizzlegames.embersurvivors">Get it on Google Play</a></li>
-<li><a href="https://apps.apple.com/app/id6809781155">Download on the App Store</a></li>
-<li><a href="privacy.html">Privacy Policy</a></li>
-</ul>
+  <header>
+    <img src="favicon.png" alt="Fizzle Games logo">
+    <div>
+      <h1>Fizzle Games</h1>
+      <p class="tag" data-lang="en">Indie mobile game studio · action survival games</p>
+      <p class="tag" data-lang="tr">Bağımsız mobil oyun stüdyosu · aksiyon ve hayatta kalma oyunları</p>
+    </div>
+  </header>
 
-<h2>War Survivor Last Stand</h2>
-<p>Survive endless waves of enemies on an infinite battlefield, level up and unlock new heroes and powers.</p>
-<ul>
-<li><a href="https://play.google.com/store/apps/details?id=com.fizzlegames.laststandwarsurvivor">Get it on Google Play</a></li>
-<li><a href="last-stand/">Game page</a></li>
-<li><a href="last-stand-privacy/">Privacy Policy</a></li>
-</ul>
+  <div class="games">
+    <div class="game">
+      <a href="https://apps.apple.com/app/id6809781155"><img src="img/ember.jpg" alt="Ember Survivors"></a>
+      <div>
+        <h2>Ember Survivors</h2>
+        <p data-lang="en">Survive the horde! Battle endless waves of monsters, level up your hero, collect diamonds and gold and unlock powerful upgrades.</p>
+        <p data-lang="tr">Sürüye karşı hayatta kal! Sonsuz canavar dalgalarıyla savaş, kahramanını geliştir, elmas ve altın topla, güçlü yükseltmeler aç.</p>
+        <div class="links">
+          <a class="store" href="https://apps.apple.com/app/id6809781155">App Store</a>
+          <a class="store" href="https://play.google.com/store/apps/details?id=com.fizzlegames.embersurvivors">Google Play</a>
+          <a href="privacy.html"><span data-lang="en">Privacy Policy</span><span data-lang="tr">Gizlilik Politikası</span></a>
+        </div>
+      </div>
+    </div>
 
-<h2>Contact</h2>
-<p><a href="mailto:sseemmiihh.kcb@gmail.com">sseemmiihh.kcb@gmail.com</a></p>
+    <div class="game">
+      <a href="https://play.google.com/store/apps/details?id=com.semgames.ironsurvivormechwar"><img src="img/iron.jpg" alt="Iron Survivor: Mech War"></a>
+      <div>
+        <h2>Iron Survivor: Mech War</h2>
+        <p data-lang="en">Pilot your mech and survive the robot swarm. Blast through waves of enemy machines, upgrade your weapons and hold the line.</p>
+        <p data-lang="tr">Robotunu yönet ve robot sürüsüne karşı hayatta kal. Düşman makine dalgalarını yok et, silahlarını geliştir ve hattı koru.</p>
+        <div class="links">
+          <a class="store" href="https://play.google.com/store/apps/details?id=com.semgames.ironsurvivormechwar">Google Play</a>
+          <span class="soon" data-lang="en">App Store – coming soon</span>
+          <span class="soon" data-lang="tr">App Store – yakında</span>
+          <a href="iron-survivor-privacy/"><span data-lang="en">Privacy Policy</span><span data-lang="tr">Gizlilik Politikası</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="game">
+      <a href="last-stand/"><img src="img/laststand.jpg" alt="War Survivor Last Stand"></a>
+      <div>
+        <h2>War Survivor Last Stand</h2>
+        <p data-lang="en">Endless monster waves, mighty bosses, one last hero. Choose from 4 heroes, fight across 7 maps and make your last stand.</p>
+        <p data-lang="tr">Sonsuz canavar dalgaları, güçlü patronlar, tek bir kahraman. 4 kahramandan birini seç, 7 haritada savaş ve son savaşını ver.</p>
+        <div class="links">
+          <a class="store" href="last-stand/"><span data-lang="en">Game page</span><span data-lang="tr">Oyun sayfası</span></a>
+          <span class="soon" data-lang="en">App Store &amp; Google Play – coming soon</span>
+          <span class="soon" data-lang="tr">App Store ve Google Play – yakında</span>
+          <a href="last-stand-privacy/"><span data-lang="en">Privacy Policy</span><span data-lang="tr">Gizlilik Politikası</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 data-lang="en">Contact</h3>
+  <h3 data-lang="tr">İletişim</h3>
+  <p><a href="mailto:sseemmiihh.kcb@gmail.com">sseemmiihh.kcb@gmail.com</a></p>
+
+  <footer>© 2026 Fizzle Games</footer>
+</main>
 </body>
 </html>
